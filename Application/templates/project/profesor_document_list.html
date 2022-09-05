@@ -1,0 +1,42 @@
+{%extends 'base.html' %}
+
+{% block content %}
+
+<h4>Profesor document list</h4>
+
+<br>
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Naslov</th>
+            <th>Dokument</th>
+            <th>Vrijeme izrade</th>
+            <th>Kreator</th>
+            <th>Action</th>
+        </tr>
+    </thead> 
+    <tbody>
+        {% for doc in docs %}
+        <tr>
+            <td> {{ doc.id }} </td>
+            <td> {{ doc.Naslov }} </td>
+            <td> {{ doc.Dokument }}
+            <td> {{ doc.Vrijeme }} </td>
+            <td> {{ doc.Kreator }} </td>
+            <td>
+                {% if user.Role_id != 3%}
+                <a href="/document_share/{{doc.id}}" type="button" class="btn btn-primary" style="color: white;">Share</a>
+                <a href="/document_stop_share/{{doc.id}}" type="button" class="btn btn-primary" style="color: white;">Cancel Share</a>
+                <a href="/document_delete/{{doc.id}}" type="button" class="btn btn-danger" style="color: white;">Delete</a>
+                {% endif %}
+                <br>
+                <a href="{{ doc.Dokument.url }}" class="btn btn-primary btn-sm" target="_blank">Download file</a>
+            </td>
+        </tr>
+        
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

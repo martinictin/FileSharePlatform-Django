@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<center><h2>Users list </h2></center>
+
+{%if user.Role_id == 1 %}
+<a type="button" class="btn btn-primary" href="/user_create/" style="margin-bottom: 10px; color: white;">Create user</a>
+<p></p>
+<a type="button" class="btn btn-success" href="/users/" style="margin-bottom: 10px; color: white;">Users list</a>
+<a type="button" class="btn btn-success" href="/users_students/" style="margin-bottom: 10px; color: white;">Sort by student</a>
+<a type="button" class="btn btn-success" href="/users_profesors/" style="margin-bottom: 10px; color: white;">Sort by professor</a>
+{%endif%}
+<table class="table" style="width: 100%;">
+	<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">Email</th>
+			<th scope="col">Role</th>
+			<th scope="col">Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		{%for u in users%}	
+			<tr>
+				<th scope="row">{{ u.id }}</th>
+				<td>{{ u.Email }}</td>
+				<td>{{ u.Role_id}}
+				<td>
+					<a href="/user_edit/{{u.id}}" type="button" class="btn btn-primary" style="color: white;">Edit</a>
+					<a href="/user_delete/{{u.id}}" type="button" class="btn btn-danger" style="color: white;">Delete</a>
+				</td>
+			</tr>
+		{%endfor%}			
+	</tbody>
+</table>
+
+{% if users.has_previous %}
+    <a href="?page1">&laquo First</a>
+    <a href="?page={{users.previous_page_number}}"></a>
+{% endif %}
+
+Page {{users.number}} of {{ users.paginator.num_pages}}
+{% if users.has_next %}
+    <a href="?page= {{users.next_page_number}}">next</a>
+    <a href="?page={{users.paginator.num_pages}}">Last &raquo</a>
+{% endif %}
+
+{%endblock%}

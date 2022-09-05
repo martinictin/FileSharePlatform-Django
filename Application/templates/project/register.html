@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card text-center">
+	<h2>Register</h2>
+	<div class="card-body">
+		<form method="post">
+			{% csrf_token %}
+
+			{% for field in form %}
+				<div class="row">
+					<div class="col-sm-1"></div>
+					<div class="col-sm-5" style="text-align: right;">{{ field.label_tag }}</div>
+					<div class="col-sm-2">{{ field }}</div>
+				</div>
+
+				{% if field.help_text %}
+					<small style="color: grey;">{{ field.help_text }}</small>
+				{% endif %}
+
+				{% for error in field.errors %}
+					<p style="color: red;">{{ error }}</p>
+				{% endfor %}
+
+				{% if login_form.non_field_errors %}
+					<div style="color: red">
+						<p>{{ login_form.non_field_errors }}</p>
+					</div>
+				{% endif %}
+				<br>
+			{% endfor %}
+			<br>
+			<input type="submit" class="btn btn-primary" value="Register">
+		</form>
+	</div>
+</div>
+{% endblock %}

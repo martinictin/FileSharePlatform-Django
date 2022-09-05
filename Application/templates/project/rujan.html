@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<center><h2>Users list </h2></center>
+
+{%if user.Role_id == 1 %}
+<a type="button" class="btn btn-primary" href="/user_create/" style="margin-bottom: 10px; color: white;">Create user</a>
+<p></p>
+<a type="button" class="btn btn-success" href="/users/" style="margin-bottom: 10px; color: white;">Users list</a>
+<a type="button" class="btn btn-success" href="/users_students/" style="margin-bottom: 10px; color: white;">Sort by student</a>
+<a type="button" class="btn btn-success" href="/users_profesors/" style="margin-bottom: 10px; color: white;">Sort by professor</a>
+{%endif%}
+<table class="table" style="width: 100%;">
+	<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">Korisnik</th>
+			<th scope="col">Zbroj</th>
+		</tr>
+	</thead>
+	<tbody>
+		{%for u in users%}	
+        
+			<tr>
+				<th scope="row">{{ u.id }}</th>
+				<td>{{ u.Email }}</td>
+				<td>{{ id_count }}
+				<td>
+					<a href="/document_page/{{u.id}}" type="button" class="btn btn-primary" style="color: white;">{{ u.Email }} {{ id_count}}</a>
+				</td>
+			</tr>
+		{%endfor%}
+	</tbody>
+</table>
+
+{%endblock%}

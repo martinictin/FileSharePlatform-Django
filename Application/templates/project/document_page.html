@@ -1,0 +1,37 @@
+{%extends 'base.html' %}
+
+{% block content %}
+
+<h4>Rujan </h4>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Naslov</th>
+            <th>Dokument</th>
+            <th>Broj studenata</th>
+        </tr>
+    </thead> 
+    <tbody>
+        {% for doc in docs %}
+        
+        <tr>
+            <td> {{ doc.id }} </td>
+            <td> {{ doc.Naslov }} </td>
+            <td> {{ doc.Dokument }}
+        
+        {% for s in studenti%}
+            <td> {{ s }} </td>
+        {% endfor %}  
+        </tr>
+        {% endfor %}
+       
+        
+    </tbody>
+    
+</table>
+
+
+{% endblock %}

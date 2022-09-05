@@ -1,0 +1,53 @@
+{%extends 'base.html' %}
+
+{% block content %}
+
+<h4>Document list</h4>
+{% if user.Role_id != 3%}
+<a href="/upload" type="button" class="btn btn-primary" style="color: white;">New document</a>
+{% endif %}
+<a href="/document_list_by_name" type="button" class="btn btn-primary" style="color: white;">Sort by name</a>
+<form method="get">
+    {{profs.form}}
+    <button class ="btn btn-sm btn-danger" type="submit">Submit</button>
+</form>
+<br>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Naslov</th>
+            <th>Dokument</th>
+            <th>Vrijeme izrade</th>
+            <th>Kreator</th>
+            <th>Action</th>
+        </tr>
+    </thead> 
+    <tbody>
+        {% for doc in profs.qs %}
+        <tr>
+            <td> {{ doc.id }} </td>
+            <td> {{ doc.Naslov }} </td>
+            <td> {{ doc.Dokument }}
+            <td> {{ doc.Vrijeme }} </td>
+            <td> {{ doc.Kreator }} </td>
+            <td>
+                {% if user.Role_id != 3%}
+                <a href="/document_share/{{doc.id}}" type="button" class="btn btn-primary" style="color: white;">Share</a>
+                <a href="/document_stop_share/{{doc.id}}" type="button" class="btn btn-primary" style="color: white;">Cancel Share</a>
+                <a href="/document_delete/{{doc.id}}" type="button" class="btn btn-danger" style="color: white;">Delete</a>
+                {% endif %}
+                <br>
+                <a href="{{ doc.Dokument.url }}" class="btn btn-primary btn-sm" target="_blank">Download file</a>
+            </td>
+        </tr>
+        
+        {% endfor %}
+    </tbody>
+    
+</table>
+
+
+{% endblock %}

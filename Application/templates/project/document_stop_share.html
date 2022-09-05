@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<center>
+	<h2>Cancel Shared Document</h2>
+	<form method="post">
+		{% csrf_token %}
+		<table class='w-50 table table-light' style="border-radius:10px;">
+			{% for field in document_form %}
+			<tr>
+				<th>{{field.label}}</th>
+				<td>{{ field }}</td>
+			</tr>
+			{% endfor %}
+		</table>
+		<button type="submit" class="btn btn-lg btn-success">Submit</button>
+		<a type="submit" class="btn btn-lg btn-primary" href="/document_list/" style="color: white;">Back</a>
+	</form>
+</center>
+<br>
+{% endblock %}
